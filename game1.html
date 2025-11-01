@@ -8,13 +8,14 @@
 </head>
 <body>
 <header>
-    <img src="logo.png.webp" alt="Samsung Logo" class="logo">
-    <h2>Quiz Samsung</h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung Logo" class="logo">
+<h2>Quiz Samsung</h2>
 </header>
 <main id="quizContainer"></main>
 <script>
 let player = localStorage.getItem('currentPlayer');
 let scores = JSON.parse(localStorage.getItem('scores'));
+
 const quizQuestions = [
 {q:"En quelle année Samsung a été fondée ?", options:["1938","1948","1958","1968"], answer:0},
 {q:"Quel produit est célèbre chez Samsung ?", options:["Galaxy","iPhone","PlayStation","Kindle"], answer:0},
@@ -22,10 +23,13 @@ const quizQuestions = [
 {q:"Quel est le système d’exploitation utilisé par la plupart des smartphones Samsung ?", options:["Android","iOS","Windows","Linux"], answer:0},
 {q:"Quel est le nom de la série de téléphones haut de gamme de Samsung ?", options:["Galaxy S","Galaxy A","Galaxy M","Galaxy X"], answer:0}
 ];
+
 let currentQ=0;
+
 function showQuestion(){
     if(currentQ>=quizQuestions.length){
         localStorage.setItem('scores', JSON.stringify(scores));
+        db.ref('players/' + player).set(scores);
         window.location.href='game2start.html';
         return;
     }
@@ -34,14 +38,17 @@ function showQuestion(){
     q.options.forEach((opt,i)=>{html+=`<button onclick="checkAnswer(${i})">${opt}</button>`;});
     document.getElementById('quizContainer').innerHTML=html;
 }
+
 function checkAnswer(i){
     if(i===quizQuestions[currentQ].answer) scores.quiz+=1;
     currentQ++;
     localStorage.setItem('scores', JSON.stringify(scores));
     showQuestion();
 }
+
 showQuestion();
 </script>
 </body>
 </html>
+
 

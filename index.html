@@ -5,22 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samsung Game Challenge - Accueil</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 </head>
 <body>
 <header>
-    <img src="logo.png.webp" alt="Samsung Logo" class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung Logo" class="logo">
     <h1>Samsung Game Challenge</h1>
 </header>
 <main>
     <label>Entrez votre nom:</label><br>
-    <input type="text" id="playerName" placeholder="Votre nom ici">
-    <br>
+    <input type="text" id="playerName" placeholder="Votre nom ici"><br>
     <button onclick="startGame()">Commencer le jeu</button>
 </main>
 <footer>
     <p>© 2025 Samsung Game Challenge</p>
 </footer>
 <script>
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "API_KEY_HERE",
+  authDomain: "PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "PROJECT_ID",
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 function startGame(){
     const name = document.getElementById('playerName').value.trim();
     if(!name){alert('Veuillez entrer votre nom !'); return;}
@@ -31,4 +42,5 @@ function startGame(){
 </script>
 </body>
 </html>
+
 
